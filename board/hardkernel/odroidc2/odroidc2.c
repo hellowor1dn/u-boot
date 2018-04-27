@@ -35,9 +35,10 @@ extern unsigned int get_mmc_size(void);
 #define GPIO_BLUELED		132
 #define GPIO_USB_PWREN		123
 #define GPIO_OTG_PWREN		124
-#define GPIO_TF3V3		35	/* GPIOY_12 */
-#define GPIO_TF1V8		122	/* GPIOAO_3 */
+#define GPIO_TF3V3		    35	/* GPIOY_12 */
+#define GPIO_TF1V8		    122	/* GPIOAO_3 */
 #define GPIO_UPS_POWER_LATCH	37	/* GPIOY_14 */
+#define GPIO_SISTER_RESET   26  /* GPIOY_3 */
 
 static const char *c2_hdmimodes[] = {
 	"480cvbs",
@@ -479,6 +480,10 @@ int board_late_init(void)
 	/* UPS Power latch */
 	gpio_request(GPIO_UPS_POWER_LATCH, "ups power latch");
 	gpio_direction_output(GPIO_UPS_POWER_LATCH, 1);
+
+    /* Sisterboard Reset */
+    gpio_request(GPIO_SISTER_RESET, "sister reset");
+    gpio_direction_output(GPIO_SISTER_RESET, 0);
 
 	return 0;
 }
